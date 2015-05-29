@@ -130,39 +130,39 @@ var PeerManager = (function () {
       return localId;
     },
     
-    setLocalStream: function(stream) {
-
-      // if local cam has been stopped, remove it from all outgoing streams.
-      if(!stream) {
-        for(id in peerDatabase) {
-          pc = peerDatabase[id].pc;
-          if(!!pc.getLocalStreams().length) {
-            pc.removeStream(localStream);
-            offer(id);
-          }
-        }
-      }
-
-      localStream = stream;
-    }, 
-
-    toggleLocalStream: function(remoteId) {
-      peer = peerDatabase[remoteId] || addPeer(remoteId);
-      toggleLocalStream(peer.pc);
-    },
-    
+    //setLocalStream: function(stream) {
+    //
+    //  // if local cam has been stopped, remove it from all outgoing streams.
+    //  if(!stream) {
+    //    for(id in peerDatabase) {
+    //      pc = peerDatabase[id].pc;
+    //      if(!!pc.getLocalStreams().length) {
+    //        pc.removeStream(localStream);
+    //        offer(id);
+    //      }
+    //    }
+    //  }
+    //
+    //  localStream = stream;
+    //},
+    //
+    //toggleLocalStream: function(remoteId) {
+    //  peer = peerDatabase[remoteId] || addPeer(remoteId);
+    //  toggleLocalStream(peer.pc);
+    //},
+    //
     peerInit: function(remoteId) {
       peer = peerDatabase[remoteId] || addPeer(remoteId);
       send('init', remoteId, null);
-    },
-
-    peerRenegociate: function(remoteId) {
-      offer(remoteId);
-    },
-
-    send: function(type, payload) {
-      socket.emit(type, payload);
     }
+
+    //peerRenegociate: function(remoteId) {
+    //  offer(remoteId);
+    //},
+    //
+    //send: function(type, payload) {
+    //  socket.emit(type, payload);
+    //}
   };
   
 });

@@ -5,6 +5,7 @@ module.exports = function(io, streams) {
     client.emit('id', client.id);
 
     client.on('message', function (details) {
+      console.log('-- ' + details.type + ' message --');
       var otherClient = io.sockets.connected[details.to];
 
       if (!otherClient) {
@@ -22,6 +23,7 @@ module.exports = function(io, streams) {
     });
     
     client.on('update', function(options) {
+      console.log('-- ' + options + ' update --');
       streams.update(client.id, options.name);
     });
 
