@@ -3,45 +3,6 @@
 		function($locationProvider){$locationProvider.html5Mode(true);}
     );
 	var client = new PeerManager();
-	var mediaConfig = {
-        audio:true,
-        video: {
-			mandatory: {},
-			optional: []
-        }
-    };
-
-    app.factory('camera', ['$rootScope', '$window', function($rootScope, $window){
-        //var camera = {};
-        //camera.preview = $window.document.getElementById('localVideo');
-        //
-        //camera.start = function(){
-		//	return requestUserMedia(mediaConfig)
-		//	.then(function(stream){
-		//		attachMediaStream(camera.preview, stream);
-		//		client.setLocalStream(stream);
-		//		camera.stream = stream;
-		//		$rootScope.$broadcast('cameraIsOn',true);
-		//	})
-		//	.catch(Error('Failed to get access to local media.'));
-		//};
-        //camera.stop = function(){
-    		//return new Promise(function(resolve, reject){
-		//		try {
-		//			camera.stream.stop();
-		//			camera.preview.src = '';
-		//			resolve();
-		//		} catch(error) {
-		//			reject(error);
-		//		}
-    		//})
-    		//.then(function(result){
-    		//	$rootScope.$broadcast('cameraIsOn',false);
-    		//});
-		//};
-		//return camera;
-		return null;
-    }]);
 
 	app.controller('RemoteStreamsController', ['$location', '$http', function($location, $http){
 		var rtc = this;
@@ -81,29 +42,7 @@
 				stream = {id: stream, isPlaying: false};
 				rtc.remoteStreams.push(stream);
 			}
-			//if(camera.isOn){
-			//	client.toggleLocalStream(stream.id);
-			//	if(stream.isPlaying){
-			//		client.peerRenegociate(stream.id);
-			//	} else {
-			//		client.peerInit(stream.id);
-			//	}
-			//	stream.isPlaying = !stream.isPlaying;
-			//} else {
-			//	camera.start()
-			//	.then(function(result) {
-			//		client.toggleLocalStream(stream.id);
-			//		if(stream.isPlaying){
-			//			client.peerRenegociate(stream.id);
-			//		} else {
-			//			client.peerInit(stream.id);
-			//		}
-			//		stream.isPlaying = !stream.isPlaying;
-			//	})
-			//	.catch(function(err) {
-			//		console.log(err);
-			//	});
-			//}
+
 		};
 
 		//initial load
@@ -113,38 +52,5 @@
     	};
 	}]);
 
-	//app.controller('LocalStreamController',[ '$scope', '$window', function( $scope, $window){
-		//var localStream = this;
-		//localStream.name = 'Guest';
-		//localStream.link = '';
-		//localStream.cameraIsOn = false;
-        //
-		//$scope.$on('cameraIsOn', function(event,data) {
-    		//$scope.$apply(function() {
-		//    	localStream.cameraIsOn = data;
-		//    });
-		//});
-        //
-		//localStream.toggleCam = function(){
-		//	if(localStream.cameraIsOn){
-		//		camera.stop()
-		//		.then(function(result){
-		//			client.send('leave');
-	    	//		client.setLocalStream(null);
-		//		})
-		//		.catch(function(err) {
-		//			console.log(err);
-		//		});
-		//	} else {
-		//		camera.start()
-		//		.then(function(result) {
-		//			localStream.link = $window.location.host + '/' + client.getId();
-		//			client.send('readyToStream', { name: localStream.name });
-		//		})
-		//		.catch(function(err) {
-		//			console.log(err);
-		//		});
-		//	}
-		//};
-	//}]);
+
 })();
